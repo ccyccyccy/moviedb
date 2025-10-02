@@ -1,45 +1,35 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
+import { NavigationContainer } from '@react-navigation/native';
 
-import { NewAppScreen } from '@react-native/new-app-screen';
-import { StatusBar, StyleSheet, useColorScheme, View } from 'react-native';
-import {
-  SafeAreaProvider,
-  useSafeAreaInsets,
-} from 'react-native-safe-area-context';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import HomeIcon from './assets/HomeIcon';
+import WatchlistIcon from './assets/WatchListIcon';
+import { HomeScreen } from './src/screens/HomeScreen';
+import { WatchList } from './src/screens/WatchList';
+
+const Tab = createBottomTabNavigator();
 
 function App() {
-  const isDarkMode = useColorScheme() === 'dark';
-
   return (
-    <SafeAreaProvider>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <AppContent />
-    </SafeAreaProvider>
+    <NavigationContainer>
+      <Tab.Navigator
+        screenOptions={({ route }) => ({
+          tabBarStyle: { backgroundColor: '#042541' },
+          tabBarIcon: ({ color, size }) => {
+            if (route.name === 'homeScreen')
+              return <HomeIcon width={size} height={size} fill={color} />;
+            if (route.name === 'watchList')
+              return <WatchlistIcon width={size} height={size} fill={color} />;
+          },
+          tabBarActiveTintColor: '#fff',
+          tabBarInactiveTintColor: '#aaa',
+          tabBarShowLabel: false,
+        })}
+      >
+        <Tab.Screen name="homeScreen" component={HomeScreen} />
+        <Tab.Screen name="watchList" component={WatchList} />
+      </Tab.Navigator>
+    </NavigationContainer>
   );
 }
-
-function AppContent() {
-  const safeAreaInsets = useSafeAreaInsets();
-
-  return (
-    <View style={styles.container}>
-      <NewAppScreen
-        templateFileName="App.tsx"
-        safeAreaInsets={safeAreaInsets}
-      />
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
 
 export default App;
