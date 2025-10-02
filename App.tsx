@@ -5,14 +5,20 @@ import HomeIcon from './assets/HomeIcon';
 import WatchlistIcon from './assets/WatchListIcon';
 import { HomeScreen } from './src/screens/HomeScreen';
 import { WatchList } from './src/screens/WatchList';
+import { TMDBHeader } from './src/components/TMDBHeader';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const Tab = createBottomTabNavigator();
 
 function App() {
   return (
     <NavigationContainer>
+      <SafeAreaView>
+        <TMDBHeader />
+      </SafeAreaView>
       <Tab.Navigator
         screenOptions={({ route }) => ({
+          headerShown: false,
           tabBarStyle: { backgroundColor: '#042541' },
           tabBarIcon: ({ color, size }) => {
             if (route.name === 'homeScreen')

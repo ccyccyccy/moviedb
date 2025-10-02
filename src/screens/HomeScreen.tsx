@@ -1,9 +1,12 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import { FilterMenu } from '../components/FilterMenu';
+import { MovieList } from '../components/MovieList';
 
 export function HomeScreen() {
   return (
     <View style={styles.container}>
-      <Text>Homescreen</Text>
+      <FilterMenu />
+      <MovieList />
     </View>
   );
 }
@@ -14,4 +17,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  filterMenu: {},
 });
