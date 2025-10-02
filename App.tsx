@@ -7,12 +7,14 @@ import { HomeScreen } from './src/screens/HomeScreen';
 import { WatchList } from './src/screens/WatchList';
 import { TMDBHeader } from './src/components/TMDBHeader';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { StatusBar } from 'react-native';
 
 const Tab = createBottomTabNavigator();
 
 function App() {
   return (
     <NavigationContainer>
+      <StatusBar barStyle="dark-content" />
       <SafeAreaView>
         <TMDBHeader />
       </SafeAreaView>
@@ -32,6 +34,7 @@ function App() {
         })}
       >
         <Tab.Screen name="homeScreen" component={HomeScreen} />
+        {/* <Tab.Screen name="homeScreen" component={WatchList} /> */}
         <Tab.Screen name="watchList" component={WatchList} />
       </Tab.Navigator>
     </NavigationContainer>
