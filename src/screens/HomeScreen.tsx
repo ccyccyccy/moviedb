@@ -1,48 +1,44 @@
 import { FlatList, StyleSheet } from 'react-native';
 import { FilterMenu } from '../components/FilterMenu';
 import { useInfiniteQuery } from '@tanstack/react-query';
-import { getListOfMovies } from '../apis';
+import { getListOfMovies, searchMovie } from '../apis';
 import { LoadMoreButton } from '../components/MovieList/LoadMoreButton';
 import { MovieCard } from '../components/MovieList/MovieCard';
 import { useAtom } from 'jotai';
-import { filterAtom, sortCriteriaAtom } from '../store/filter';
+import { categoryFilterAtom, searchFilterAtom } from '../store/filter';
 
 export function HomeScreen() {
-  const [filter] = useAtom(filterAtom);
-  const [sortCriteria] = useAtom(sortCriteriaAtom);
+  const [categoryFilter] = useAtom(categoryFilterAtom);
+  const [searchFilter] = useAtom(searchFilterAtom);
 
   const { data, fetchNextPage, hasNextPage, isFetching } = useInfiniteQuery({
-    queryKey: [filter, 'filterQuery'] as const,
+    queryKey: searchFilter
+      ? (['searchFilter', searchFilter] as const)
+      : (['categoryFilter', categoryFilter] as const),
     queryFn: ({ pageParam, queryKey }) => {
-      const [variant] = queryKey;
-      return getListOfMovies({
-        variant,
-        page: pageParam,
-      });
+      const [filterType, param] = queryKey;
+      if (filterType === 'categoryFilter') {
+        return getListOfMovies({
+          variant: param,
+          page: pageParam,
+        });
+      } else {
+        return searchMovie({
+          query: param,
+          page: pageParam,
+        });
+      }
     },
     initialPageParam: 1,
-    getNextPageParam: (lastPage, pages) => {
+    getNextPageParam: lastPage => {
       if (lastPage.page >= lastPage.total_pages) {
         return null;
       }
-      return lastPage.page + 1;
+      return Math.max(lastPage.page, 1) + 1; // Weird API bug that returns page as 0 on page 1 of search
     },
   });
 
   const movieList = [...(data?.pages.flatMap(x => x.results) ?? [])];
-
-  // if (sortCriteria !== undefined) {
-  //   sortedMovieList.sort((a, b) => {
-  //     switch (sortCriteria) {
-  //       case SortMovieCriteria.ALPHA:
-  //         return a.title < b.title ? -1 : 1;
-  //       case SortMovieCriteria.RATING:
-  //         return a.vote_average - b.vote_average;
-  //       case SortMovieCriteria.RELEASE:
-  //         return new Date(a.release_date) < new Date(b.release_date) ? -1 : 1;
-  //     }
-  //   });
-  // }
 
   return (
     <FlatList

@@ -58,9 +58,13 @@ export async function getMovieDetail({
   return await res.json();
 }
 
+type GetMovieCreditsOption = {
+  movieId: number;
+};
+
 export async function getMovieCredits({
   movieId,
-}: GetMovieDetailOption): Promise<MovieCredits> {
+}: GetMovieCreditsOption): Promise<MovieCredits> {
   const res = await fetch(
     `${API_BASE_URL}/movie/${movieId}/credits?language=en-US}`,
     {
@@ -72,6 +76,33 @@ export async function getMovieCredits({
     },
   );
   const jsonRes = await res.json();
-  console.log('jsonRes :>> ', jsonRes);
   return jsonRes;
+}
+
+type SearchMovieOption = {
+  query: string;
+  page: number;
+};
+
+export async function searchMovie({
+  query,
+  page,
+}: SearchMovieOption): Promise<MovieListApiResponse> {
+  const res = await fetch(
+    `${API_BASE_URL}/search/movie?query=${query}&page=${page}&language=en-US}`,
+    {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${process.env.BEARER_TOKEN}`,
+        Accept: 'application/json',
+      },
+    },
+  );
+  console.log(
+    '`${API_BASE_URL}/search/movie?query=${query}&page=${page}&language=en-US}` :>> ',
+    `${API_BASE_URL}/search/movie?query=${query}&page=${page}&language=en-US}`,
+  );
+  const jsonRes = await res.json();
+  console.log('jsonRes :>> ', jsonRes);
+  return await jsonRes;
 }
