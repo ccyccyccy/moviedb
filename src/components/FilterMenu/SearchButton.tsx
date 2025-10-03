@@ -1,14 +1,14 @@
-import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Pressable, StyleSheet, Text } from 'react-native';
 
 type Props = {
   text: string;
-  enabled?: boolean;
+  onPress?: () => void;
 };
 
-export function SearchButton({ text, enabled = true }: Props) {
+export function SearchButton({ text, onPress }: Props) {
   return (
-    <Pressable style={[styles.button, enabled && styles.enabledButton]}>
-      <Text style={enabled && styles.enabledText}>{text}</Text>
+    <Pressable style={styles.button} onPress={onPress}>
+      <Text>{text}</Text>
     </Pressable>
   );
 }
@@ -20,15 +20,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 20,
     backgroundColor: '#E4E4E4',
-  },
-  enabledButton: {
-    backgroundColor: '#00B4E4',
-  },
-  inputBox: {
-    width: '100%',
-    padding: 10,
-  },
-  enabledText: {
-    color: '#fff',
   },
 });

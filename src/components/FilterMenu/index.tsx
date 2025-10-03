@@ -1,24 +1,29 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { DropdownButton } from './DropdownButton';
 import { useState } from 'react';
 import { SearchBar } from './SearchBar';
 import { SearchButton } from './SearchButton';
+import { SortMovieCriteria, FilterMovieOption } from '../../const';
 
 const SortCriteriaOptions = [
-  { label: 'By alphabetical order', value: 'ALPHA' },
-  { label: 'By rating', value: 'RATING' },
-  { label: 'By release date', value: 'RELEASE' },
+  { label: 'By alphabetical order', value: SortMovieCriteria.ALPHA },
+  { label: 'By rating', value: SortMovieCriteria.RATING },
+  { label: 'By release date', value: SortMovieCriteria.RELEASE },
 ];
 
 const FilterOptions = [
-  { label: 'Now Playing', value: 'NOW_PLAYING' },
-  { label: 'Upcoming', value: 'UP_COMING' },
-  { label: 'Popular', value: 'POPULAR' },
+  { label: 'Now Playing', value: FilterMovieOption.NOW_PLAYING },
+  { label: 'Upcoming', value: FilterMovieOption.UP_COMING },
+  { label: 'Popular', value: FilterMovieOption.POPULAR },
 ];
 
 export function FilterMenu() {
-  const [filter, setFilter] = useState<string>(FilterOptions[0].value);
-  const [sortCriteria, setSortCriteria] = useState<string | undefined>();
+  const [filter, setFilter] = useState<FilterMovieOption>(
+    FilterMovieOption.NOW_PLAYING,
+  );
+  const [sortCriteria, setSortCriteria] = useState<
+    SortMovieCriteria | undefined
+  >();
   const [searchValue, setSearchValue] = useState('');
 
   return (
@@ -39,7 +44,7 @@ export function FilterMenu() {
         placeholderText="Search..."
         onChangeValue={val => setSearchValue(val)}
       />
-      <SearchButton text="Search" enabled={searchValue.length > 0} />
+      <SearchButton text="Search" />
     </View>
   );
 }

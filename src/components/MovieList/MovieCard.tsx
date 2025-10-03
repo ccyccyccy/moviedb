@@ -1,6 +1,6 @@
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
 import { MovieDetails } from '../../apis/type';
-import { POSTER_IMAGE_BASE_URL } from '../../apis';
+import { POSTER_IMAGE_BASE_URL } from '../../const';
 
 type Props = {
   movieDetails: MovieDetails;

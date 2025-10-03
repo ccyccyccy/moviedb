@@ -1,11 +1,31 @@
+import { API_BASE_URL, FilterMovieOption } from '../const';
 import { MovieListApiResponse, TMDBConfigurationApiResponse } from './type';
-
 import Config from 'react-native-config';
-export const POSTER_IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w500';
 
-export async function getNowPlayList(): Promise<MovieListApiResponse> {
+export type GetMovieListOption = {
+  variant: FilterMovieOption;
+  page: number;
+};
+
+export async function getListOfMovies({
+  variant,
+  page,
+}: GetMovieListOption): Promise<MovieListApiResponse> {
+  let variantPath = 'now_playing';
+  switch (variant) {
+    case FilterMovieOption.NOW_PLAYING:
+      variantPath = 'now_playing';
+      break;
+    case FilterMovieOption.POPULAR:
+      variantPath = 'popular';
+      break;
+    case FilterMovieOption.UP_COMING:
+      variantPath = 'upcoming';
+      break;
+  }
+
   const res = await fetch(
-    'https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1',
+    `${API_BASE_URL}/movie/${variantPath}?language=en-US&page=${page}`,
     {
       method: 'GET',
       headers: {
@@ -18,7 +38,7 @@ export async function getNowPlayList(): Promise<MovieListApiResponse> {
 }
 
 export async function getConfiguration(): Promise<TMDBConfigurationApiResponse> {
-  const res = await fetch('https://api.themoviedb.org/3/configuration', {
+  const res = await fetch(`${API_BASE_URL}/configuration`, {
     method: 'GET',
     headers: {
       Authorization: `Bearer ${Config.BEARER_TOKEN}`,
