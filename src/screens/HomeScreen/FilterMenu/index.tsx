@@ -1,6 +1,6 @@
 import { StyleSheet, View } from 'react-native';
 import { DropdownButton } from './DropdownButton';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { SearchBar } from './SearchBar';
 import { SearchButton } from './SearchButton';
 import { useAtom } from 'jotai';
@@ -18,10 +18,18 @@ export function FilterMenu() {
     useAtom(categoryFilterAtom);
   const [categoryFilter, setCategoryFilter] = useState<
     FilterMovieOption | undefined
-  >(categoryFilterFromAtom);
+  >(undefined);
+  const [hasInitFromStorage, setHasInitFromStorage] = useState(false);
 
   const [searchValue, setSearchValue] = useState('');
   const [, setSearchFilterAtom] = useAtom(searchFilterAtom);
+
+  useEffect(() => {
+    if (!hasInitFromStorage && categoryFilterFromAtom !== undefined) {
+      setCategoryFilter(categoryFilterFromAtom);
+      setHasInitFromStorage(true);
+    }
+  }, [categoryFilterFromAtom]);
 
   return (
     <View style={styles.filterContainer}>

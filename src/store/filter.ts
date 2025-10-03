@@ -6,9 +6,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const storage = createJSONStorage(() => AsyncStorage);
 
-export const categoryFilterAtom = atomWithStorage<FilterMovieOption>(
-  'categoryFilter',
-  FilterMovieOption.NOW_PLAYING,
-  storage,
-);
+export const categoryFilterAtom = atomWithStorage<
+  FilterMovieOption | undefined
+>('categoryFilter', undefined, storage);
 export const searchFilterAtom = atom('');
