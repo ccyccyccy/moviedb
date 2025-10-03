@@ -2,6 +2,7 @@ import { StyleSheet, View } from 'react-native';
 import { MovieCredits, MovieDetails } from '../../apis/type';
 import { CircularProgress } from '../CircularProgress';
 import { Text } from '../Text';
+import CastCarousel from './CastCarousell';
 
 type Props = {
   movieDetails: MovieDetails;
@@ -57,7 +58,7 @@ export function MovieDetailedInformation({
         </View>
         <View style={styles.creditContainer}>
           {directorsAndWriters.slice(0, 2).map(([name, jobs]) => (
-            <View style={styles.creditSection}>
+            <View style={styles.creditSection} key={name}>
               <Text style={styles.creditLabel}>{name}</Text>
               <Text style={styles.creditName}>{jobs.sort().join(', ')}</Text>
             </View>
@@ -69,9 +70,13 @@ export function MovieDetailedInformation({
           <Text style={styles.taglineText}>{movieDetails.tagline}</Text>
         </View>
       )}
-      <View style={styles.overviewContainer}>
-        <Text style={styles.overviewTitle}>Overview</Text>
+      <View style={styles.sectionContainer}>
+        <Text style={styles.sectionTitle}>Overview</Text>
         <Text style={styles.overviewDescription}>{movieDetails.overview}</Text>
+      </View>
+      <View style={styles.sectionContainer}>
+        <Text style={styles.sectionTitle}>Cast members</Text>
+        <CastCarousel movieCredits={movieCredits} />
       </View>
     </View>
   );
@@ -119,10 +124,10 @@ const styles = StyleSheet.create({
     fontStyle: 'italic',
     fontSize: 16,
   },
-  overviewContainer: {
+  sectionContainer: {
     gap: 10,
   },
-  overviewTitle: {
+  sectionTitle: {
     color: '#fff',
     fontWeight: 'bold',
     fontSize: 20,

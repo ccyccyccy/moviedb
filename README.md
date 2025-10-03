@@ -100,7 +100,8 @@ To learn more about React Native, take a look at the following resources:
 
 Use `npx @react-native-community/cli init` instead of `react-native init`. Should be the same behavior.
 Dropdown list will auto close on selection.
-API doesn't provide the functionality to search by movie name & category together. Hence I will respect the user's last action. e.g. I will reset the category bar on if user searches when search bar is not filled, and reset the search bar on when the user set the category.
+API doesn't provide the functionality to search by movie name & category together. Hence I will respect the user's last action. e.g. I will reset the category bar on if user searches when search bar is not filled, and reset the search bar on when the user set the category to prevent users from misunderstanding the filters.
+As such, I would also persist the latest category the user selected, even if they did a "Search" action before closing the app.
 Assume logo stays on top when scrolling
 API doesn't provide moving rating (PG13, etc). I will use PG13 as placeholder.
 Assume we only want to show max 2 person on the movie details, with director as priority.

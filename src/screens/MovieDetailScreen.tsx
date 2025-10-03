@@ -1,4 +1,4 @@
-import { View } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import { type StaticScreenProps } from '@react-navigation/native';
 import { MovieSummary } from '../apis/type';
 import { MovieDetailScreenHeader } from '../components/MovieDetails/MovieDetailScreenHeader';
@@ -27,7 +27,7 @@ export function MovieDetailScreen({ route }: Props) {
   });
 
   return (
-    <View>
+    <ScrollView>
       <MovieDetailScreenHeader movieSummary={movieSummary} />
       {movieDetails && <MovieOverview movieDetails={movieDetails} />}
       {movieDetails && movieCredits && (
@@ -36,6 +36,6 @@ export function MovieDetailScreen({ route }: Props) {
           movieCredits={movieCredits}
         />
       )}
-    </View>
+    </ScrollView>
   );
 }
