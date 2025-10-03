@@ -52,15 +52,26 @@ export function DropdownButton<T>({
       </Pressable>
       {isOpen && (
         <View style={styles.dropdownContainer}>
-          {options.map((option, idx) => (
-            <Pressable
-              key={idx}
-              onPress={() => onSelectValue(option.value)}
-              style={styles.dropdownItem}
-            >
-              <Text>{option.label}</Text>
-            </Pressable>
-          ))}
+          {options.map((option, idx) => {
+            const isSelected = option.value === selectedValue;
+            return (
+              <Pressable
+                key={idx}
+                onPress={() => {
+                  onSelectValue(option.value);
+                  setIsOpen(false);
+                }}
+                style={[
+                  styles.dropdownItem,
+                  isSelected && styles.selectedDropdownItem,
+                ]}
+              >
+                <Text style={isSelected && styles.selectedDropdownText}>
+                  {option.label}
+                </Text>
+              </Pressable>
+            );
+          })}
         </View>
       )}
     </View>
@@ -96,5 +107,11 @@ const styles = StyleSheet.create({
     paddingLeft: 15,
     paddingVertical: 8,
     borderRadius: 3,
+  },
+  selectedDropdownItem: {
+    backgroundColor: '#00B4E4',
+  },
+  selectedDropdownText: {
+    color: '#fff',
   },
 });

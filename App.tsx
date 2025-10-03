@@ -34,7 +34,6 @@ function App() {
         })}
       >
         <Tab.Screen name="homeScreen" component={HomeScreen} />
-        {/* <Tab.Screen name="homeScreen" component={WatchList} /> */}
         <Tab.Screen name="watchList" component={WatchList} />
       </Tab.Navigator>
     </NavigationContainer>
