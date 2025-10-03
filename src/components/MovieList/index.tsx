@@ -1,20 +1,18 @@
-import { Text, View } from 'react-native';
+import { useQuery } from '@tanstack/react-query';
+import { FlatList } from 'react-native';
+import { getNowPlayList } from '../../apis';
+import { MovieCard } from './MovieCard';
 
 export function MovieList() {
+  const movieList = useQuery({
+    queryKey: ['now_playing'],
+    queryFn: getNowPlayList,
+  });
   return (
-    <View>
-      <View>
-        <Text>1</Text>
-      </View>
-      <View>
-        <Text>2</Text>
-      </View>
-      <View>
-        <Text>3</Text>
-      </View>
-      <View>
-        <Text>4</Text>
-      </View>
-    </View>
+    <FlatList
+      data={movieList.data?.results}
+      keyExtractor={item => item.id.toString()}
+      renderItem={({ item }) => <MovieCard movieDetails={item} />}
+    />
   );
 }

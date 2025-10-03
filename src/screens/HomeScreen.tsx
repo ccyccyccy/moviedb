@@ -17,6 +17,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#fff',
     paddingHorizontal: 20,
+    gap: 30,
   },
   filterMenu: {},
 });
