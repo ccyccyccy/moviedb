@@ -1,14 +1,21 @@
 import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
-import { MovieDetails } from '../../apis/type';
+import { MovieSummary } from '../../apis/type';
 import { POSTER_IMAGE_BASE_URL } from '../../const';
+import { useNavigation } from '@react-navigation/native';
 
 type Props = {
-  movieDetails: MovieDetails;
+  movieDetails: MovieSummary;
 };
 
 export function MovieCard({ movieDetails }: Props) {
+  const navigation = useNavigation();
   return (
-    <Pressable style={styles.cardContainer}>
+    <Pressable
+      style={styles.cardContainer}
+      onPress={() =>
+        navigation.navigate('detailsScreen', { movieSummary: movieDetails })
+      }
+    >
       <Image
         source={{ uri: `${POSTER_IMAGE_BASE_URL}/${movieDetails.poster_path}` }}
         style={styles.poster}

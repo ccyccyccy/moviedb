@@ -1,5 +1,9 @@
 import { API_BASE_URL, FilterMovieOption } from '../const';
-import { MovieListApiResponse, TMDBConfigurationApiResponse } from './type';
+import {
+  MovieDetails,
+  MovieListApiResponse,
+  TMDBConfigurationApiResponse,
+} from './type';
 import Config from 'react-native-config';
 
 export type GetMovieListOption = {
@@ -24,11 +28,6 @@ export async function getListOfMovies({
       break;
   }
 
-  console.log(
-    '`${API_BASE_URL}/movie/${variantPath}?language=en-US&page=${page}` :>> ',
-    `${API_BASE_URL}/movie/${variantPath}?language=en-US&page=${page}`,
-  );
-
   const res = await fetch(
     `${API_BASE_URL}/movie/${variantPath}?language=en-US&page=${page}`,
     {
@@ -39,6 +38,23 @@ export async function getListOfMovies({
       },
     },
   );
+  return await res.json();
+}
+
+type GetMovieDetailOption = {
+  movieId: number;
+};
+
+export async function getMovieDetail({
+  movieId,
+}: GetMovieDetailOption): Promise<MovieDetails> {
+  const res = await fetch(`${API_BASE_URL}/movie/${movieId}?language=en-US}`, {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${process.env.BEARER_TOKEN}`,
+      Accept: 'application/json',
+    },
+  });
   return await res.json();
 }
 

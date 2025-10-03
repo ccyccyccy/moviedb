@@ -39,7 +39,7 @@ export function DropdownButton<T>({
       <Pressable
         style={styles.button}
         onPress={() => {
-          chevronRotation.value = withSpring(isOpen ? 90 : 0, {
+          chevronRotation.value = withSpring(isOpen ? 0 : 90, {
             duration: 300,
           });
           setIsOpen(open => !open);

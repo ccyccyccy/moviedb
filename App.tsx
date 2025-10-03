@@ -1,47 +1,48 @@
-import { NavigationContainer } from '@react-navigation/native';
+import {
+  createStaticNavigation,
+  StaticParamList,
+} from '@react-navigation/native';
 
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import HomeIcon from './assets/HomeIcon';
-import WatchlistIcon from './assets/WatchListIcon';
 import { HomeScreen } from './src/screens/HomeScreen';
-import { WatchList } from './src/screens/WatchList';
 import { TMDBHeader } from './src/components/TMDBHeader';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from 'react-native';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { MovieDetailScreen } from './src/screens/MovieDetailScreen';
 
-const Tab = createBottomTabNavigator();
+const RootStack = createNativeStackNavigator({
+  screens: {
+    homeScreen: { screen: HomeScreen },
+    detailsScreen: {
+      screen: MovieDetailScreen,
+    },
+  },
+  screenOptions: {
+    headerShown: false,
+  },
+});
+
+const Navigation = createStaticNavigation(RootStack);
+
+type RootStackParamList = StaticParamList<typeof RootStack>;
+
+declare global {
+  namespace ReactNavigation {
+    interface RootParamList extends RootStackParamList {}
+  }
+}
+
 const queryClient = new QueryClient();
 
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <NavigationContainer>
-        <StatusBar barStyle="dark-content" />
-        <SafeAreaView>
-          <TMDBHeader />
-        </SafeAreaView>
-        <Tab.Navigator
-          screenOptions={({ route }) => ({
-            headerShown: false,
-            tabBarStyle: { backgroundColor: '#042541' },
-            tabBarIcon: ({ color, size }) => {
-              if (route.name === 'homeScreen')
-                return <HomeIcon width={size} height={size} fill={color} />;
-              if (route.name === 'watchList')
-                return (
-                  <WatchlistIcon width={size} height={size} fill={color} />
-                );
-            },
-            tabBarActiveTintColor: '#fff',
-            tabBarInactiveTintColor: '#aaa',
-            tabBarShowLabel: false,
-          })}
-        >
-          <Tab.Screen name="homeScreen" component={HomeScreen} />
-          <Tab.Screen name="watchList" component={WatchList} />
-        </Tab.Navigator>
-      </NavigationContainer>
+      <StatusBar barStyle="dark-content" />
+      <SafeAreaView>
+        <TMDBHeader />
+      </SafeAreaView>
+      <Navigation />
     </QueryClientProvider>
   );
 }
