@@ -100,6 +100,6 @@ To learn more about React Native, take a look at the following resources:
 
 Use `npx @react-native-community/cli init` instead of `react-native init`. Should be the same behavior.
 Dropdown list will auto close on selection.
-Search button will light up when search bar has text
+Assume logo stays on top when scrolling
 
 CREATE A .env file with BEARER_TOKEN=$YOUR_TOKEN

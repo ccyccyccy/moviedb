@@ -24,12 +24,17 @@ export async function getListOfMovies({
       break;
   }
 
+  console.log(
+    '`${API_BASE_URL}/movie/${variantPath}?language=en-US&page=${page}` :>> ',
+    `${API_BASE_URL}/movie/${variantPath}?language=en-US&page=${page}`,
+  );
+
   const res = await fetch(
     `${API_BASE_URL}/movie/${variantPath}?language=en-US&page=${page}`,
     {
       method: 'GET',
       headers: {
-        Authorization: `Bearer ${Config.BEARER_TOKEN}`,
+        Authorization: `Bearer ${process.env.BEARER_TOKEN}`,
         Accept: 'application/json',
       },
     },
@@ -41,7 +46,7 @@ export async function getConfiguration(): Promise<TMDBConfigurationApiResponse> 
   const res = await fetch(`${API_BASE_URL}/configuration`, {
     method: 'GET',
     headers: {
-      Authorization: `Bearer ${Config.BEARER_TOKEN}`,
+      Authorization: `Bearer ${process.env.BEARER_TOKEN}`,
       Accept: 'application/json',
     },
   });

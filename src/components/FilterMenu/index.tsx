@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { SearchBar } from './SearchBar';
 import { SearchButton } from './SearchButton';
 import { SortMovieCriteria, FilterMovieOption } from '../../const';
+import { useAtom } from 'jotai';
+import { filterAtom } from '../../store/filter';
 
 const SortCriteriaOptions = [
   { label: 'By alphabetical order', value: SortMovieCriteria.ALPHA },
@@ -21,6 +23,8 @@ export function FilterMenu() {
   const [filter, setFilter] = useState<FilterMovieOption>(
     FilterMovieOption.NOW_PLAYING,
   );
+  const [, setFilterAtom] = useAtom(filterAtom);
+
   const [sortCriteria, setSortCriteria] = useState<
     SortMovieCriteria | undefined
   >();
@@ -44,7 +48,7 @@ export function FilterMenu() {
         placeholderText="Search..."
         onChangeValue={val => setSearchValue(val)}
       />
-      <SearchButton text="Search" />
+      <SearchButton text="Search" onPress={() => setFilterAtom(filter)} />
     </View>
   );
 }
