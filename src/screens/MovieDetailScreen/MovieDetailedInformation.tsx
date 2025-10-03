@@ -1,8 +1,8 @@
 import { StyleSheet, View } from 'react-native';
 import { MovieCredits, MovieDetails } from '../../apis/type';
-import { CircularProgress } from '../CircularProgress';
-import { Text } from '../Text';
 import CastCarousel from './CastCarousell';
+import { Text } from '../../components/Text';
+import { CircularProgress } from './CircularProgress';
 
 type Props = {
   movieDetails: MovieDetails;

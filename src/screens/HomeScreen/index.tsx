@@ -1,11 +1,11 @@
 import { FlatList, StyleSheet } from 'react-native';
-import { FilterMenu } from '../components/FilterMenu';
 import { useInfiniteQuery } from '@tanstack/react-query';
-import { getListOfMovies, searchMovie } from '../apis';
-import { LoadMoreButton } from '../components/MovieList/LoadMoreButton';
-import { MovieCard } from '../components/MovieList/MovieCard';
+import { getListOfMovies, searchMovie } from '../../apis';
 import { useAtom } from 'jotai';
-import { categoryFilterAtom, searchFilterAtom } from '../store/filter';
+import { categoryFilterAtom, searchFilterAtom } from '../../store/filter';
+import { FilterMenu } from './FilterMenu';
+import { LoadMoreButton } from './MovieList/LoadMoreButton';
+import { MovieCard } from './MovieList/MovieCard';
 
 export function HomeScreen() {
   const [categoryFilter] = useAtom(categoryFilterAtom);

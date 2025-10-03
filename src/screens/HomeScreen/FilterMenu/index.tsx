@@ -3,9 +3,9 @@ import { DropdownButton } from './DropdownButton';
 import { useState } from 'react';
 import { SearchBar } from './SearchBar';
 import { SearchButton } from './SearchButton';
-import { FilterMovieOption } from '../../const';
 import { useAtom } from 'jotai';
-import { categoryFilterAtom, searchFilterAtom } from '../../store/filter';
+import { FilterMovieOption } from '../../../const';
+import { categoryFilterAtom, searchFilterAtom } from '../../../store/filter';
 
 const FilterOptions = [
   { label: 'Now Playing', value: FilterMovieOption.NOW_PLAYING },

@@ -1,12 +1,12 @@
 import { Pressable, StyleSheet, View } from 'react-native';
-import ChevronRight from '../../icons/ChevronRight';
 import { useState } from 'react';
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
   withSpring,
 } from 'react-native-reanimated';
-import { Text } from '../Text';
+import { Text } from '../../../components/Text';
+import ChevronRight from '../../../icons/ChevronRight';
 
 type Props<T> = {
   options: { label: string; value: T }[];

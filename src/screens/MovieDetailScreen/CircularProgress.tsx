@@ -6,7 +6,7 @@ import {
   ViewStyle,
 } from 'react-native';
 import { Svg, Circle } from 'react-native-svg';
-import { Text } from './Text';
+import { Text } from '../../components/Text';
 
 export interface CircularProgressProps {
   progress: number;

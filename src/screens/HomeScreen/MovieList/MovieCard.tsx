@@ -1,8 +1,8 @@
 import { Image, Pressable, StyleSheet, View } from 'react-native';
-import { MovieSummary } from '../../apis/type';
-import { POSTER_IMAGE_BASE_URL } from '../../const';
 import { useNavigation } from '@react-navigation/native';
-import { Text } from '../Text';
+import { Text } from '../../../components/Text';
+import { MovieSummary } from '../../../apis/type';
+import { POSTER_IMAGE_BASE_URL } from '../../../const';
 
 type Props = {
   movieDetails: MovieSummary;

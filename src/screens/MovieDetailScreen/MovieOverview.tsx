@@ -3,7 +3,7 @@ import { POSTER_IMAGE_BASE_URL } from '../../const';
 import { MovieDetails } from '../../apis/type';
 import ElipsisIcon from '../../icons/Elipsis';
 import ISO6391 from 'iso-639-1';
-import { Text } from '../Text';
+import { Text } from '../../components/Text';
 
 type Props = {
   movieDetails: MovieDetails;

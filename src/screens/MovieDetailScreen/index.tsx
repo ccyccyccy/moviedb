@@ -1,11 +1,11 @@
-import { ScrollView, View } from 'react-native';
+import { ScrollView } from 'react-native';
 import { type StaticScreenProps } from '@react-navigation/native';
-import { MovieSummary } from '../apis/type';
-import { MovieDetailScreenHeader } from '../components/MovieDetails/MovieDetailScreenHeader';
+import { MovieSummary } from '../../apis/type';
 import { useQuery } from '@tanstack/react-query';
-import { getMovieCredits, getMovieDetail } from '../apis';
-import { MovieOverview } from '../components/MovieDetails/MovieOverview';
-import { MovieDetailedInformation } from '../components/MovieDetails/MovieDetailedInformation';
+import { getMovieCredits, getMovieDetail } from '../../apis';
+import { MovieDetailScreenHeader } from './MovieDetailScreenHeader';
+import { MovieDetailedInformation } from './MovieDetailedInformation';
+import { MovieOverview } from './MovieOverview';
 
 type Props = StaticScreenProps<{
   movieSummary: MovieSummary;
