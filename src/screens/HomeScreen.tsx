@@ -12,7 +12,7 @@ export function HomeScreen() {
   const [sortCriteria] = useAtom(sortCriteriaAtom);
 
   const { data, fetchNextPage, hasNextPage, isFetching } = useInfiniteQuery({
-    queryKey: [filter],
+    queryKey: [filter, 'filterQuery'] as const,
     queryFn: ({ pageParam, queryKey }) => {
       const [variant] = queryKey;
       return getListOfMovies({

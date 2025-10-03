@@ -1,10 +1,10 @@
 import { API_BASE_URL, FilterMovieOption } from '../const';
 import {
+  MovieCredits,
   MovieDetails,
   MovieListApiResponse,
   TMDBConfigurationApiResponse,
 } from './type';
-import Config from 'react-native-config';
 
 export type GetMovieListOption = {
   variant: FilterMovieOption;
@@ -58,13 +58,20 @@ export async function getMovieDetail({
   return await res.json();
 }
 
-export async function getConfiguration(): Promise<TMDBConfigurationApiResponse> {
-  const res = await fetch(`${API_BASE_URL}/configuration`, {
-    method: 'GET',
-    headers: {
-      Authorization: `Bearer ${process.env.BEARER_TOKEN}`,
-      Accept: 'application/json',
+export async function getMovieCredits({
+  movieId,
+}: GetMovieDetailOption): Promise<MovieCredits> {
+  const res = await fetch(
+    `${API_BASE_URL}/movie/${movieId}/credits?language=en-US}`,
+    {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${process.env.BEARER_TOKEN}`,
+        Accept: 'application/json',
+      },
     },
-  });
-  return await res.json();
+  );
+  const jsonRes = await res.json();
+  console.log('jsonRes :>> ', jsonRes);
+  return jsonRes;
 }

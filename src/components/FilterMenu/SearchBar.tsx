@@ -21,6 +21,8 @@ export function SearchBar({ value, placeholderText, onChangeValue }: Props) {
 
 const styles = StyleSheet.create({
   searchContainer: {
+    elevation: 2,
+    backgroundColor: '#fff',
     width: '100%',
     borderWidth: 2,
     borderColor: '#ddd',

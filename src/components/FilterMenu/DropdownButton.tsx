@@ -81,6 +81,8 @@ export function DropdownButton<T>({
 
 const styles = StyleSheet.create({
   buttonContainer: {
+    elevation: 2,
+    backgroundColor: '#fff',
     width: '100%',
     borderWidth: 2,
     borderColor: '#ddd',

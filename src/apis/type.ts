@@ -26,19 +26,6 @@ export type MovieListApiResponse = {
   total_results: number; // default 0
 };
 
-export type TMDBConfigurationApiResponse = {
-  images: {
-    base_url: string;
-    secure_base_url: string;
-    backdrop_sizes: string[];
-    logo_sizes: string[];
-    poster_sizes: string[];
-    profile_sizes: string[];
-    still_sizes: string[];
-  };
-  change_keys: string[];
-};
-
 export type MovieDetails = {
   adult: boolean;
   backdrop_path: string;
@@ -80,4 +67,35 @@ export type MovieDetails = {
   video: boolean;
   vote_average: number;
   vote_count: number;
+};
+
+export type MovieCredits = {
+  id: number;
+  cast: {
+    adult: boolean;
+    gender: number;
+    id: number;
+    known_for_department: string;
+    name: string;
+    original_name: string;
+    popularity: number;
+    profile_path: string | null;
+    cast_id: number;
+    character: string;
+    credit_id: string;
+    order: number;
+  }[];
+  crew: {
+    adult: boolean;
+    gender: number;
+    id: number;
+    known_for_department: string;
+    name: string;
+    original_name: string;
+    popularity: number;
+    profile_path: string | null;
+    credit_id: string;
+    department: string;
+    job: string;
+  }[];
 };

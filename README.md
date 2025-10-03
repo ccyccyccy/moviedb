@@ -101,5 +101,7 @@ To learn more about React Native, take a look at the following resources:
 Use `npx @react-native-community/cli init` instead of `react-native init`. Should be the same behavior.
 Dropdown list will auto close on selection.
 Assume logo stays on top when scrolling
+API doesn't provide moving rating (PG13, etc). I will use PG13 as placeholder.
+Assume we only want to show max 2 person on the movie details, with director as priority.
 
 CREATE A .env file with BEARER_TOKEN=$YOUR_TOKEN

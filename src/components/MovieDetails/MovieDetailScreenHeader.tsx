@@ -37,7 +37,8 @@ const styles = StyleSheet.create({
   backButton: {
     transform: [{ rotate: '180deg' }],
     position: 'absolute',
-    left: 12,
+    left: 0,
+    padding: 15,
   },
   title: {
     color: '#fff',

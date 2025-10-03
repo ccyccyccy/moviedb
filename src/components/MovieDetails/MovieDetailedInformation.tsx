@@ -1,13 +1,44 @@
 import { StyleSheet, View } from 'react-native';
-import { MovieDetails } from '../../apis/type';
+import { MovieCredits, MovieDetails } from '../../apis/type';
 import { CircularProgress } from '../CircularProgress';
 import { Text } from '../Text';
 
 type Props = {
   movieDetails: MovieDetails;
+  movieCredits: MovieCredits;
 };
 
-export function MovieDetailedInformation({ movieDetails }: Props) {
+function getAllSortedDirectorsWriter(movieCredits: MovieCredits) {
+  const personToJobMap: Record<string, string[]> = {};
+  movieCredits.crew.forEach(person => {
+    const job = person.job;
+    if (job === 'Director' || job === 'Writer') {
+      if (!personToJobMap[person.name]) {
+        personToJobMap[person.name] = [];
+      }
+      personToJobMap[person.name].push(job);
+    }
+  });
+  return Object.entries(personToJobMap).sort(([_, jobsA], [__, jobsB]) => {
+    const getRank = (jobs: string[]) => {
+      const hasWriter = jobs.includes('writer');
+      const hasDirector = jobs.includes('director');
+
+      if (hasWriter && hasDirector) return 0;
+      if (hasDirector) return 1;
+      if (hasWriter) return 2;
+      return 3;
+    };
+
+    return getRank(jobsA) - getRank(jobsB);
+  });
+}
+
+export function MovieDetailedInformation({
+  movieDetails,
+  movieCredits,
+}: Props) {
+  const directorsAndWriters = getAllSortedDirectorsWriter(movieCredits);
   return (
     <View style={styles.detailedInfoContainer}>
       <View style={styles.scoreCreditContainer}>
@@ -25,14 +56,12 @@ export function MovieDetailedInformation({ movieDetails }: Props) {
           <Text style={styles.userScoreTitle}>User Score</Text>
         </View>
         <View style={styles.creditContainer}>
-          <View style={styles.creditSection}>
-            <Text style={styles.creditLabel}>Director</Text>
-            <Text style={styles.creditName}>Director name</Text>
-          </View>
-          <View style={styles.creditSection}>
-            <Text style={styles.creditLabel}>Writer</Text>
-            <Text style={styles.creditName}>Writer name</Text>
-          </View>
+          {directorsAndWriters.slice(0, 2).map(([name, jobs]) => (
+            <View style={styles.creditSection}>
+              <Text style={styles.creditLabel}>{name}</Text>
+              <Text style={styles.creditName}>{jobs.sort().join(', ')}</Text>
+            </View>
+          ))}
         </View>
       </View>
       {movieDetails.tagline && (

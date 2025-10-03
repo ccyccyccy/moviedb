@@ -55,6 +55,8 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     marginVertical: 8,
     flexDirection: 'row',
+    elevation: 2,
+    backgroundColor: '#fff',
   },
   poster: {
     width: 95,

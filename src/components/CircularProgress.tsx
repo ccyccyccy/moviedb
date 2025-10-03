@@ -52,7 +52,6 @@ export function CircularProgress(props: CircularProgressProps) {
     {
       color: labelColor,
       fontSize: labelSize,
-      textAlignVertical: 'bottom',
       marginLeft: labelSize / 5,
     },
     labelStyle,
@@ -62,8 +61,8 @@ export function CircularProgress(props: CircularProgressProps) {
     {
       color: labelColor,
       fontSize: labelSize / 2.5,
-      textAlignVertical: 'bottom',
       marginLeft: labelSize / 15,
+      marginTop: labelSize / 5,
     },
     labelStyle,
   ];
