@@ -26,7 +26,7 @@ export function MovieOverview({ movieDetails }: Props) {
       />
       <View style={styles.overviewDescription}>
         <View>
-          <Text style={styles.fadedWhiteText}>PG13</Text>
+          <Text style={styles.ageRatingText}>PG13</Text>
         </View>
         <View style={styles.timeContaimer}>
           <Text style={styles.whiteText}>
@@ -84,11 +84,12 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontWeight: 'bold',
   },
-  fadedWhiteText: {
+  ageRatingText: {
     color: '#fff7',
     borderWidth: 1,
     borderColor: '#fff7',
-    padding: 2,
+    paddingVertical: 2,
+    paddingHorizontal: 8,
     borderRadius: 3,
   },
   labValContainer: {
