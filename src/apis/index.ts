@@ -1,5 +1,21 @@
+import { Toast } from '../components/Toast';
 import { API_BASE_URL, FilterMovieOption } from '../const';
 import { MovieCredits, MovieDetails, MovieListApiResponse } from './type';
+
+const fetchOptions = {
+  method: 'GET',
+  headers: {
+    Authorization: `Bearer ${process.env.BEARER_TOKEN}`,
+    Accept: 'application/json',
+  },
+};
+
+function handleError(res: Response) {
+  if (!res.ok) {
+    Toast.show('Internet error. Cannot fetch movie data from API');
+    throw new Error('Network error. Cannot fetch data');
+  }
+}
 
 export type GetMovieListOption = {
   variant: FilterMovieOption;
@@ -25,14 +41,9 @@ export async function getListOfMovies({
 
   const res = await fetch(
     `${API_BASE_URL}/movie/${variantPath}?language=en-US&page=${page}`,
-    {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${process.env.BEARER_TOKEN}`,
-        Accept: 'application/json',
-      },
-    },
+    fetchOptions,
   );
+  handleError(res);
   return await res.json();
 }
 
@@ -43,16 +54,13 @@ type GetMovieDetailOption = {
 export async function getMovieDetail({
   movieId,
 }: GetMovieDetailOption): Promise<MovieDetails> {
-  const res = await fetch(`${API_BASE_URL}/movie/${movieId}?language=en-US}`, {
-    method: 'GET',
-    headers: {
-      Authorization: `Bearer ${process.env.BEARER_TOKEN}`,
-      Accept: 'application/json',
-    },
-  });
+  const res = await fetch(
+    `${API_BASE_URL}/movie/${movieId}?language=en-US}`,
+    fetchOptions,
+  );
+  handleError(res);
   return await res.json();
 }
-
 type GetMovieCreditsOption = {
   movieId: number;
 };
@@ -62,16 +70,10 @@ export async function getMovieCredits({
 }: GetMovieCreditsOption): Promise<MovieCredits> {
   const res = await fetch(
     `${API_BASE_URL}/movie/${movieId}/credits?language=en-US}`,
-    {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${process.env.BEARER_TOKEN}`,
-        Accept: 'application/json',
-      },
-    },
+    fetchOptions,
   );
-  const jsonRes = await res.json();
-  return jsonRes;
+  handleError(res);
+  return await res.json();
 }
 
 type SearchMovieOption = {
@@ -85,19 +87,8 @@ export async function searchMovie({
 }: SearchMovieOption): Promise<MovieListApiResponse> {
   const res = await fetch(
     `${API_BASE_URL}/search/movie?query=${query}&page=${page}&language=en-US}`,
-    {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer ${process.env.BEARER_TOKEN}`,
-        Accept: 'application/json',
-      },
-    },
+    fetchOptions,
   );
-  console.log(
-    '`${API_BASE_URL}/search/movie?query=${query}&page=${page}&language=en-US}` :>> ',
-    `${API_BASE_URL}/search/movie?query=${query}&page=${page}&language=en-US}`,
-  );
-  const jsonRes = await res.json();
-  console.log('jsonRes :>> ', jsonRes);
-  return await jsonRes;
+  handleError(res);
+  return await res.json();
 }
