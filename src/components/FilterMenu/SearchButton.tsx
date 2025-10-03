@@ -1,4 +1,5 @@
-import { Pressable, StyleSheet, Text } from 'react-native';
+import { Pressable, StyleSheet } from 'react-native';
+import { Text } from '../Text';
 
 type Props = {
   text: string;
@@ -8,7 +9,7 @@ type Props = {
 export function SearchButton({ text, onPress }: Props) {
   return (
     <Pressable style={styles.button} onPress={onPress}>
-      <Text>{text}</Text>
+      <Text style={styles.buttonText}>{text}</Text>
     </Pressable>
   );
 }
@@ -20,5 +21,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 20,
     backgroundColor: '#E4E4E4',
+  },
+  buttonText: {
+    fontWeight: 'semibold',
+    color: '#0008',
   },
 });

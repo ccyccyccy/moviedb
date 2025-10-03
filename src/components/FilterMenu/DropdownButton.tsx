@@ -1,11 +1,12 @@
-import { Pressable, StyleSheet, Text, View } from 'react-native';
-import ChevronRight from '../../../assets/ChevronRight';
+import { Pressable, StyleSheet, View } from 'react-native';
+import ChevronRight from '../../../icons/ChevronRight';
 import { useState } from 'react';
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
   withSpring,
 } from 'react-native-reanimated';
+import { Text } from '../Text';
 
 type Props<T> = {
   options: { label: string; value: T }[];
@@ -93,7 +94,7 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   labelText: {
-    fontWeight: 'bold',
+    fontWeight: 'semibold',
   },
   dropdownContainer: {
     borderTopWidth: 2,

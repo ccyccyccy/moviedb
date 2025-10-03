@@ -1,7 +1,8 @@
-import { View, Text, StyleSheet, Pressable } from 'react-native';
-import ChevronRight from '../../../assets/ChevronRight';
+import { View, StyleSheet, Pressable } from 'react-native';
+import ChevronRight from '../../../icons/ChevronRight';
 import { MovieSummary } from '../../apis/type';
 import { useNavigation } from '@react-navigation/native';
+import { Text } from '../Text';
 
 type Props = {
   movieSummary: MovieSummary;

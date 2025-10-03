@@ -13,7 +13,7 @@ type Props = StaticScreenProps<{
 
 export function MovieDetailScreen({ route }: Props) {
   const movieSummary = route.params.movieSummary;
-  const { data: movieDetails, isFetching } = useQuery({
+  const { data: movieDetails } = useQuery({
     queryKey: [movieSummary.id],
     queryFn: () => {
       return getMovieDetail({ movieId: movieSummary.id });

@@ -1,8 +1,9 @@
-import { View, Image, Text, StyleSheet } from 'react-native';
+import { View, Image, StyleSheet } from 'react-native';
 import { POSTER_IMAGE_BASE_URL } from '../../const';
 import { MovieDetails } from '../../apis/type';
-import ElipsisIcon from '../../../assets/Elipsis';
+import ElipsisIcon from '../../../icons/Elipsis';
 import ISO6391 from 'iso-639-1';
+import { Text } from '../Text';
 
 type Props = {
   movieDetails: MovieDetails;
@@ -46,11 +47,11 @@ export function MovieOverview({ movieDetails }: Props) {
           </Text>
         </View>
         <View style={styles.labValContainer}>
-          <Text style={styles.boldWhiteText}>Status: </Text>
+          <Text style={styles.semiboldWhiteText}>Status: </Text>
           <Text style={styles.whiteText}>{movieDetails?.status}</Text>
         </View>
         <View style={styles.labValContainer}>
-          <Text style={styles.boldWhiteText}>Original Language: </Text>
+          <Text style={styles.semiboldWhiteText}>Original Language: </Text>
           <Text style={styles.whiteText}>
             {ISO6391.getName(movieDetails?.original_language)}
           </Text>
@@ -80,9 +81,9 @@ const styles = StyleSheet.create({
   whiteText: {
     color: '#fff',
   },
-  boldWhiteText: {
+  semiboldWhiteText: {
     color: '#fff',
-    fontWeight: 'bold',
+    fontWeight: 'semibold',
   },
   ageRatingText: {
     color: '#fff7',

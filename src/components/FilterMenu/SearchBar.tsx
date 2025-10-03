@@ -29,5 +29,6 @@ const styles = StyleSheet.create({
   inputBox: {
     width: '100%',
     padding: 10,
+    fontFamily: 'SourceSansPro-Regular',
   },
 });

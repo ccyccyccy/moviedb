@@ -1,12 +1,12 @@
 import {
   StyleProp,
   StyleSheet,
-  Text,
   TextStyle,
   View,
   ViewStyle,
 } from 'react-native';
 import { Svg, Circle } from 'react-native-svg';
+import { Text } from './Text';
 
 export interface CircularProgressProps {
   progress: number;
@@ -52,7 +52,7 @@ export function CircularProgress(props: CircularProgressProps) {
     {
       color: labelColor,
       fontSize: labelSize,
-      includeFontPadding: false,
+      textAlignVertical: 'bottom',
       marginLeft: labelSize / 5,
     },
     labelStyle,
@@ -62,6 +62,7 @@ export function CircularProgress(props: CircularProgressProps) {
     {
       color: labelColor,
       fontSize: labelSize / 2.5,
+      textAlignVertical: 'bottom',
       marginLeft: labelSize / 15,
     },
     labelStyle,

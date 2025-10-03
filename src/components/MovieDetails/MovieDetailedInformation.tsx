@@ -1,6 +1,7 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { MovieDetails } from '../../apis/type';
 import { CircularProgress } from '../CircularProgress';
+import { Text } from '../Text';
 
 type Props = {
   movieDetails: MovieDetails;
@@ -34,9 +35,11 @@ export function MovieDetailedInformation({ movieDetails }: Props) {
           </View>
         </View>
       </View>
-      <View style={styles.taglineContainer}>
-        <Text style={styles.taglineText}>{movieDetails.tagline}</Text>
-      </View>
+      {movieDetails.tagline && (
+        <View style={styles.taglineContainer}>
+          <Text style={styles.taglineText}>{movieDetails.tagline}</Text>
+        </View>
+      )}
       <View style={styles.overviewContainer}>
         <Text style={styles.overviewTitle}>Overview</Text>
         <Text style={styles.overviewDescription}>{movieDetails.overview}</Text>

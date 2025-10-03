@@ -1,7 +1,8 @@
-import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
+import { Image, Pressable, StyleSheet, View } from 'react-native';
 import { MovieSummary } from '../../apis/type';
 import { POSTER_IMAGE_BASE_URL } from '../../const';
 import { useNavigation } from '@react-navigation/native';
+import { Text } from '../Text';
 
 type Props = {
   movieDetails: MovieSummary;
@@ -30,7 +31,11 @@ export function MovieCard({ movieDetails }: Props) {
             {movieDetails.title}
           </Text>
           <Text style={styles.releaseDateText}>
-            {movieDetails.release_date}
+            {new Date(movieDetails.release_date).toLocaleDateString('en-GB', {
+              day: '2-digit',
+              month: 'long',
+              year: 'numeric',
+            })}
           </Text>
         </View>
         <View>
@@ -65,7 +70,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   detailsTitleText: {
-    fontWeight: 'bold',
+    fontWeight: 'semibold',
   },
   releaseDateText: {
     color: '#999999',
