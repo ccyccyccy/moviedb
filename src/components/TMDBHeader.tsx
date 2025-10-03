@@ -1,5 +1,5 @@
 import { StyleSheet, View } from 'react-native';
-import TMDBIcon from '../../icons/TMDBIcon';
+import TMDBIcon from '../icons/TMDBIcon';
 
 export function TMDBHeader() {
   return (

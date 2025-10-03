@@ -1,5 +1,5 @@
 import { Pressable, StyleSheet, View } from 'react-native';
-import ChevronRight from '../../../icons/ChevronRight';
+import ChevronRight from '../../icons/ChevronRight';
 import { useState } from 'react';
 import Animated, {
   useAnimatedStyle,

@@ -1,7 +1,7 @@
 import { View, Image, StyleSheet } from 'react-native';
 import { POSTER_IMAGE_BASE_URL } from '../../const';
 import { MovieDetails } from '../../apis/type';
-import ElipsisIcon from '../../../icons/Elipsis';
+import ElipsisIcon from '../../icons/Elipsis';
 import ISO6391 from 'iso-639-1';
 import { Text } from '../Text';
 

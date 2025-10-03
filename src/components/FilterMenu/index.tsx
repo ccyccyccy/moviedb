@@ -14,20 +14,24 @@ const FilterOptions = [
 ];
 
 export function FilterMenu() {
-  const [filter, setFilter] = useState<FilterMovieOption>(
-    FilterMovieOption.NOW_PLAYING,
-  );
+  const [categoryFilter, setCategoryFilter] = useState<
+    FilterMovieOption | undefined
+  >(FilterMovieOption.NOW_PLAYING);
   const [, setCategoryFilterAtom] = useAtom(categoryFilterAtom);
-  const [, setSearchFilterAtom] = useAtom(searchFilterAtom);
 
   const [searchValue, setSearchValue] = useState('');
+  const [, setSearchFilterAtom] = useAtom(searchFilterAtom);
 
   return (
     <View style={styles.filterContainer}>
       <DropdownButton
+        placeholderLabel="Category"
         options={FilterOptions}
-        selectedValue={filter}
-        onSelectValue={val => setFilter(val)}
+        selectedValue={categoryFilter}
+        onSelectValue={val => {
+          setCategoryFilter(val);
+          setSearchValue('');
+        }}
       />
       <SearchBar
         value={searchValue}
@@ -37,8 +41,16 @@ export function FilterMenu() {
       <SearchButton
         text="Search"
         onPress={() => {
-          setCategoryFilterAtom(filter);
-          setSearchFilterAtom(searchValue);
+          if (searchValue) {
+            setCategoryFilter(undefined);
+            setSearchFilterAtom(searchValue);
+          } else if (categoryFilter) {
+            setCategoryFilterAtom(categoryFilter);
+            setSearchFilterAtom('');
+          } else {
+            setCategoryFilter(FilterMovieOption.NOW_PLAYING); // default
+            setSearchFilterAtom('');
+          }
         }}
       />
     </View>

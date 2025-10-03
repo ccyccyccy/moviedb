@@ -1,10 +1,5 @@
 import { API_BASE_URL, FilterMovieOption } from '../const';
-import {
-  MovieCredits,
-  MovieDetails,
-  MovieListApiResponse,
-  TMDBConfigurationApiResponse,
-} from './type';
+import { MovieCredits, MovieDetails, MovieListApiResponse } from './type';
 
 export type GetMovieListOption = {
   variant: FilterMovieOption;
