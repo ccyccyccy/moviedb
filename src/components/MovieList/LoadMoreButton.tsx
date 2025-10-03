@@ -18,7 +18,7 @@ export function LoadMoreButton({
       onPress={onPress}
     >
       <Text style={[styles.loadMoreText, disabled && styles.disabledText]}>
-        {disabled ? 'No more movies' : loading ? 'Loading..' : 'Load more'}
+        {loading ? 'Loading..' : disabled ? 'No more movies' : 'Load more'}
       </Text>
     </Pressable>
   );

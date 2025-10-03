@@ -14,10 +14,11 @@ const FilterOptions = [
 ];
 
 export function FilterMenu() {
+  const [categoryFilterFromAtom, setCategoryFilterAtom] =
+    useAtom(categoryFilterAtom);
   const [categoryFilter, setCategoryFilter] = useState<
     FilterMovieOption | undefined
-  >(FilterMovieOption.NOW_PLAYING);
-  const [, setCategoryFilterAtom] = useAtom(categoryFilterAtom);
+  >(categoryFilterFromAtom);
 
   const [searchValue, setSearchValue] = useState('');
   const [, setSearchFilterAtom] = useAtom(searchFilterAtom);

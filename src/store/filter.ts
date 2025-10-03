@@ -1,5 +1,14 @@
 import { atom } from 'jotai';
 import { FilterMovieOption } from '../const';
+import { atomWithStorage, createJSONStorage } from 'jotai/utils';
 
-export const categoryFilterAtom = atom(FilterMovieOption.NOW_PLAYING);
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+const storage = createJSONStorage(() => AsyncStorage);
+
+export const categoryFilterAtom = atomWithStorage<FilterMovieOption>(
+  'categoryFilter',
+  FilterMovieOption.NOW_PLAYING,
+  storage,
+);
 export const searchFilterAtom = atom('');

@@ -1,7 +1,7 @@
 export enum FilterMovieOption {
-  NOW_PLAYING,
-  UP_COMING,
-  POPULAR,
+  NOW_PLAYING = 1,
+  UP_COMING = 2,
+  POPULAR = 3,
 }
 export enum SortMovieCriteria {
   ALPHA,
